@@ -6,6 +6,8 @@
 int main()
 {
     std::cout << "Hello World!\n";
+
+    auto error;//初期化漏れ
 }
 
 // プログラムの実行: Ctrl + F5 または [デバッグ] > [デバッグなしで開始] メニュー
