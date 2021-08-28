@@ -1,15 +1,13 @@
-# This is a YAML file. See <https://yaml.org>.
 linter:
-  clang_tidy:
-      
-  eslint:
-    root_dir: "Sample/"
-    npm_install: false
-
-
-ignore:
-  - "images/**"
-
-- id: coutError
-  pattern: std::cout
-  message: Error
+  cppcheck:
+    include-path: 
+    target: "Sample"
+    ignore: "vendor"
+    enable: "all"
+    std: "c99"
+    project: "Sample.sln"
+    language: "c++"
+    addon: "cert"
+    bug-hunting: true
+    parallel: true
+    suppressions-list: 
