@@ -9,3 +9,7 @@ linter:
 
 ignore:
   - "images/**"
+
+- id: coutError
+  pattern: std::cout
+  message: Error
