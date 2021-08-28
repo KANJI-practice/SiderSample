@@ -12,15 +12,22 @@ std::vector<bool> f(std::vector<bool>& a) {
 	return a;
 }
 
+void function(int&) {
+
+}
 
 int main(void)
 {
+	//未初期化
+	auto a;
+
+	//左辺値に右辺値を入れてみる
+	function(10);
+
+	//プロクシクラスに推論され、文末でライフタイムが切れて未定義な場合
 	std::vector<bool> a;
 	a.resize(10);
-
-	std::cout << a[5];
-
 	auto c = f(a)[5];
-
 	std::cout << c;
+
 }
