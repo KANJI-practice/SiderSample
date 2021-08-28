@@ -2,9 +2,9 @@
 linter:
   clang_tidy:
 
-      - id: coutError
-      pattern: std::cout
-      message: Error
+  - id: coutError
+  pattern: std::cout
+  message: Error
       
   eslint:
     root_dir: "Sample/"
