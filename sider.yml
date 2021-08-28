@@ -1,8 +1,6 @@
 # This is a YAML file. See <https://yaml.org>.
 linter:
   clang_tidy:
-    include-path:
-      - "myinclude"
 
       - id: coutError
       pattern: std::cout
