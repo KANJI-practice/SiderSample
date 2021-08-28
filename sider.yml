@@ -1,0 +1,17 @@
+# This is a YAML file. See <https://yaml.org>.
+linter:
+  clang_tidy:
+    include-path:
+      - "myinclude"
+
+      - id: coutError
+      pattern: std::cout
+      message: Error
+      
+  eslint:
+    root_dir: "Sample/"
+    npm_install: false
+
+
+ignore:
+  - "images/**"
