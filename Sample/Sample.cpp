@@ -5,56 +5,46 @@
 #include <vector>
 #include <tuple>
 
-enum Color 
+
+class Widget
 {
-	black,
-	white,
-	red
+
+public:
+	Widget() {};
+	Widget(const Widget&) = delete;
+	Widget& operator=(const Widget&) = delete;
+};
+
+class Widget2
+{
+public:
+	Widget2() {};
+
+private:
+	Widget2(const Widget2&) = delete;
+	Widget2& operator=(const Widget2&) = delete;
 };
 
 
-enum class Color2
-{
-	black,
-	white,
-	red
-};
+template<typename T>
+void processPointer(T* ptr) {};
 
-
-void func(double d) {
-
-}
-
-
-enum UserInfoFields { uiName, uiEmail, uiReputation };
-
-template<typename E> // C++14
-constexpr std::underlying_type_t<E>
-toUType(E enumerator) noexcept
-{
-	return static_cast<std::underlying_type_t<E>>(enumerator);
-}
-
+template<>
+void processPointer<double>(double*) = delete;
 
 int main(void)
 {
-	auto white = false;//本書と異なりビルド可能。ビルド時にワーニングは表示されている
-	func(white);//暗黙の型変換発生
+	//deleteをpublicに
+	Widget tmp;
+	Widget tmp2 = tmp;//「削除された関数を参照」というワーニングで分かりやすい
 
-	//Color  c = white;
+	//deleteをprivateに
+	Widget2 tmp3;
+	Widget2 tmp4 = tmp3;//「アクセスできません」というワーニングで分かりにくい
 
-	Color2  c2 = Color2::white;
-	func(c2);//暗黙の型変換は発生しない。キャスト必要。
+	int a = 10;
+	processPointer<int>(&a);
 
-	using UserInfo = // type alias; see Item 9
-		std::tuple<std::string, // name
-		std::string, // email
-		std::size_t>;
-
-	UserInfo uInfo;
-	auto val = std::get<uiName>(uInfo);//UserInfoFieldsからstd::size_tへの暗黙の変換のおかげ
-
-
-
-
+	double b = 1.0;
+	processPointer<char>(&b);
 }
