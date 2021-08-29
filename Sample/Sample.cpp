@@ -3,31 +3,58 @@
 
 #include <iostream>
 #include <vector>
+#include <tuple>
+
+enum Color 
+{
+	black,
+	white,
+	red
+};
 
 
-std::vector<bool> f(std::vector<bool>& a) {
+enum class Color2
+{
+	black,
+	white,
+	red
+};
 
-	a[5] = 1;
 
-	return a;
+void func(double d) {
+
 }
 
-void function(int a) {
 
-	std::cout << "int\n";
-}
+enum UserInfoFields { uiName, uiEmail, uiReputation };
 
-void function(void* p) {
-
-	std::cout << "void* pointer\n";
+template<typename E> // C++14
+constexpr std::underlying_type_t<E>
+toUType(E enumerator) noexcept
+{
+	return static_cast<std::underlying_type_t<E>>(enumerator);
 }
 
 
 int main(void)
 {
-	function(10);
+	auto white = false;//本書と異なりビルド可能。ビルド時にワーニングは表示されている
+	func(white);//暗黙の型変換発生
 
-	function(NULL);
+	//Color  c = white;
 
-	function(nullptr);
+	Color2  c2 = Color2::white;
+	func(c2);//暗黙の型変換は発生しない。キャスト必要。
+
+	using UserInfo = // type alias; see Item 9
+		std::tuple<std::string, // name
+		std::string, // email
+		std::size_t>;
+
+	UserInfo uInfo;
+	auto val = std::get<uiName>(uInfo);//UserInfoFieldsからstd::size_tへの暗黙の変換のおかげ
+
+
+
+
 }
