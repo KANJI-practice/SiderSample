@@ -54,6 +54,7 @@ int main() {
     Widget1 a(1);
     Widget1 b(std::move(a));
     b.print();//正常にmoveされていないので無効値が表示される
+    Widget1 e = b;
 
     Widget2 c(1);
     Widget2 d(std::move(c));//テンプレートメンバ関数が特殊メンバ関数の生成を抑制することはない
